@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 const RobotDetail = ({ robotId }) => {
   const [robot, setRobot] = useState(null);
   const [error, setError] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchRobotDetail = async () => {
@@ -23,7 +25,6 @@ const RobotDetail = ({ robotId }) => {
 
   if (!robot) return null;
 
-  // Función para reemplazar 'blob' por 'raw' en la URL de la imagen
   const getImageUrl = (url) => {
     return url ? url.replace('blob', 'raw') : null;
   };
@@ -40,9 +41,9 @@ const RobotDetail = ({ robotId }) => {
           e.target.src = 'https://via.placeholder.com/150?text=Robot+Image';
         }}
       />
-      <p className="mb-2"><strong>Año de Fabricación:</strong> {robot.añoFabricacion}</p>
-      <p className="mb-2"><strong>Capacidad de Procesamiento:</strong> {robot.capacidadProcesamiento}</p>
-      <p className="mb-2"><strong>Humor:</strong> {robot.humor}</p>
+      <p className="mb-2"><strong>{t('details.manufacturingYear')}:</strong> {robot.añoFabricacion}</p>
+      <p className="mb-2"><strong>{t('details.processingCapacity')}:</strong> {robot.capacidadProcesamiento}</p>
+      <p className="mb-2"><strong>{t('details.humor')}:</strong> {robot.humor}</p>
     </div>
   );
 };

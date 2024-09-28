@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import robotBanner from '../assets/robot-banner.png';
 import RobotDetail from './RobotDetail';
 
@@ -7,6 +8,7 @@ const RobotList = () => {
   const [robots, setRobots] = useState([]);
   const [error, setError] = useState('');
   const [selectedRobotId, setSelectedRobotId] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchRobots = async () => {
@@ -32,7 +34,7 @@ const RobotList = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-6 text-center">Adopta un Robot con Robot Lovers!</h1>
+      <h1 className="text-4xl font-bold mb-6 text-center">{t('header')}</h1>
       <div className="mb-6 flex justify-center">
         <img src={robotBanner} alt="Robot Lovers Banner" className="w-full max-w-4xl rounded-lg" />
       </div>
@@ -42,10 +44,10 @@ const RobotList = () => {
             <table className="min-w-full bg-white">
               <thead className="bg-gray-800 text-white">
                 <tr>
-                  <th className="py-3 px-4 text-left">ID</th>
-                  <th className="py-3 px-4 text-left">Nombre</th>
-                  <th className="py-3 px-4 text-left">Modelo</th>
-                  <th className="py-3 px-4 text-left">Empresa Fabricante</th>
+                  <th className="py-3 px-4 text-left">{t('table.id')}</th>
+                  <th className="py-3 px-4 text-left">{t('table.name')}</th>
+                  <th className="py-3 px-4 text-left">{t('table.model')}</th>
+                  <th className="py-3 px-4 text-left">{t('table.manufacturer')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -70,7 +72,7 @@ const RobotList = () => {
         </div>
       </div>
       <p className="mt-6 text-center text-sm text-gray-600">
-        Contact us: +57 3102105253 - info@robot-lovers.com - @robot-lovers
+        {t('contact')}
       </p>
     </div>
   );

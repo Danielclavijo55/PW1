@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import robotBanner from '../assets/robot-banner.png';
 import axios from 'axios';
 
@@ -6,6 +7,7 @@ const LoginForm = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,10 +17,10 @@ const LoginForm = ({ onLogin }) => {
         password: password
       });
       if (response.data.status === 'success') {
-        onLogin(); 
+        onLogin();
       }
     } catch (err) {
-      setError('Error de autenticación. Revise sus credenciales');
+      setError(t('login.error'));
       console.error('Error de autenticación:', err);
     }
   };
@@ -26,15 +28,15 @@ const LoginForm = ({ onLogin }) => {
   return (
     <div className="max-w-md mx-auto mt-10 p-6">
       <h1 className="text-3xl font-bold mb-6 text-center font-roboto text-black">
-        Adopta un Robot con Robot Lovers!
+        {t('header')}
       </h1>
       <div className="mb-6 flex justify-center">
         <img src={robotBanner} alt="Robot Lovers Banner" className="w-full max-w-md rounded-lg" />
       </div>
-      <h2 className="text-xl font-semibold mb-4 text-center font-roboto">Inicio de sesión</h2>
+      <h2 className="text-xl font-semibold mb-4 text-center font-roboto">{t('login.title')}</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="username" className="block text-sm font-medium text-gray-700 font-roboto">Nombre de usuario</label>
+          <label htmlFor="username" className="block text-sm font-medium text-gray-700 font-roboto">{t('login.username')}</label>
           <input
             type="text"
             id="username"
@@ -45,7 +47,7 @@ const LoginForm = ({ onLogin }) => {
           />
         </div>
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 font-roboto">Contraseña</label>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700 font-roboto">{t('login.password')}</label>
           <input
             type="password"
             id="password"
@@ -65,18 +67,18 @@ const LoginForm = ({ onLogin }) => {
             type="submit"
             className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-roboto"
           >
-            Ingresar
+            {t('login.submit')}
           </button>
           <button
             type="button"
             className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-red-400 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 font-roboto"
           >
-            Cancelar
+            {t('login.cancel')}
           </button>
         </div>
       </form>
       <p className="mt-6 text-center text-sm text-gray-600 font-inter">
-        Contact us: +57 3102105253 - info@robot-lovers.com - @robot-lovers
+        {t('contact')}
       </p>
     </div>
   );
